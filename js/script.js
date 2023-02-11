@@ -27,9 +27,13 @@ function checkWin(playerChoice, computerChoice) {
     }
 }
 
-function printRound() {
+function playRound() {
     let computerChoice = getComputerChoice();
     let playerChoice = getPlayerChoice();
     if (checkWin(playerChoice, computerChoice)) alert(`Player: ${playerScore}\nComputer: ${computerScore}\nYou won the round!`);
     else alert(`Player: ${playerScore}\nComputer: ${computerScore}\nComputer won the round!`)
+}
+
+function game() {
+
 }

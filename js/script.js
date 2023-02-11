@@ -17,12 +17,14 @@ function getPlayerChoice() {
 
 function checkWin(playerChoice, computerChoice) {
     if (playerChoice == computerChoice) {
-        return;
+        return "tie";
     } else if ((playerChoice == "rock" && computerChoice == "scissors") || (playerChoice == "paper" && computerChoice == "rock") || (playerChoice == "scissors" && computerChoice == "paper")) {
+        console.log(playerChoice, computerChoice);
         playerScore++;
         return true;
     } else if ((computerChoice == "rock" && playerChoice == "scissors") || (computerChoice == "paper" && playerChoice == "rock") || (computerChoice == "scissors" && playerChoice == "paper")) {
         computerScore++;
+        console.log(playerChoice, computerChoice);
         return false;
     }
 }
@@ -30,20 +32,24 @@ function checkWin(playerChoice, computerChoice) {
 function playRound() {
     let computerChoice = getComputerChoice();
     let playerChoice = getPlayerChoice();
-    if (checkWin(playerChoice, computerChoice)) alert(`Player: ${playerScore}\nComputer: ${computerScore}\nYou won the round!`);
+    let winStatus = checkWin(playerChoice, computerChoice);
+    if (winStatus == true) alert(`Player: ${playerScore}\nComputer: ${computerScore}\nYou won the round!`);
+    else if (winStatus == "tie") alert(`Player: ${playerScore}\nComputer: ${computerScore}\nTie!`);
     else alert(`Player: ${playerScore}\nComputer: ${computerScore}\nComputer won the round!`);
 }
 
 function game() {
-    for (let i =0; i < 5; i++)
+    for (let i = 0; i < 5; i++)
     {
         playRound();
     }
     if (playerScore > computerScore) {
         alert("You Won!");
     } else if (playerScore < computerScore) {
-        alert("Computer won");
+        alert("Computer won!");
     } else {
         alert("It's a tie!");
     }
 }
+
+game();

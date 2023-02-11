@@ -17,12 +17,19 @@ function getPlayerChoice() {
 
 function checkWin(playerChoice, computerChoice) {
     if (PlayerChoice == computerChoice) {
-        return "tie";
+        return;
     } else if ((playerChoice == "rock" && computerChoice == "scissors") || (playerChoice == "paper" && computerChoice == "rock") || (playerChoice == "scissors" && computerChoice == "paper")) {
         playerScore++;
-        return "win";
+        return true;
     } else if ((computerChoice == "rock" && playerChoice == "scissors") || (computerChoice == "paper" && playerChoice == "rock") || (computerChoice == "scissors" && playerChoice == "paper")) {
         computerScore++;
-        return "lose";
+        return false;
     }
+}
+
+function printRound() {
+    let computerChoice = getComputerChoice();
+    let playerChoice = getPlayerChoice();
+    if (checkWin(playerChoice, computerChoice)) alert(`Player: ${playerScore}\nComputer: ${computerScore}\nYou won the round!`);
+    else alert(`Player: ${playerScore}\nComputer: ${computerScore}\nComputer won the round!`)
 }

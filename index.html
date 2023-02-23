@@ -4,23 +4,30 @@
         <meta charset="UTF-8">
         <title>Rock Paper Scissors</title>
         <script src="js/script.js" defer></script>
+        <link rel="stylesheet" href="style/style.css">
     </head>
     <body>
+        <h1>Rock Paper Scissors</h1>
         <div class="container">
-            <h1>Rock Paper Scissors</h1>
-            <div class="buttons-player">
-                <div id="rock">Rock</div>
-                <div id="paper">Paper</div>
-                <div id="scissors">Scissors</div>
-            </div>
-            <div class="buttons-computer">
-                <div id="rock-computer">Rock</div>
-                <div id="paper-computer">Paper</div>
-                <div id="scissors-computer">Scissors</div>
-            </div>
-            <div class="score">
-                <div class="computer-score">Computer Score: <span id="computer-score-id"></span></div>
+            <div class="player">
+                <h2>Player</h2>
                 <div class="player-score">Your Score: <span id="player-score-id"></span></div>
+                <div class="buttons">
+                    <div id="rock" class="rock">Rock</div>
+                    <div id="paper" class="paper">Paper</div>
+                    <div id="scissors" class="scissors btn">Scissors</div>
+                </div>
+
+            </div>
+            <div class="computer">
+                <h2>Computer</h2>
+                <div class="computer-score">Score: <span id="computer-score-id"></span></div>
+                <div class="buttons">
+                    <div id="rock-computer" class="rock btn">Rock</div>
+                    <div id="paper-computer" class="paper btn">Paper</div>
+                    <div id="scissors-computer" class="scissors btn">Scissors</div>
+                </div>
+                
             </div>
         </div>
     </body>

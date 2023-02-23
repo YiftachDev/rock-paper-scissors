@@ -1,5 +1,6 @@
 let playerScore = 0;
 let computerScore = 0;
+let rounds_played = 0;
 
 const rockBtn = document.querySelector("#rock");
 const paperBtn = document.querySelector("#paper");
@@ -8,19 +9,30 @@ const playerScoreDiv = document.querySelector(".player-score");
 const computerScoreDiv = document.querySelector(".computerDiv");
 const playerScoreId = document.querySelector("#player-score-id");
 const computerScoreId = document.querySelector("#computer-score-id");
+let playerChoice;
 playerScoreId.textContent = playerScore;
 computerScoreId.textContent = computerScore;
 
-rockBtn.addEventListener("click", () => playRound("rock"));
-paperBtn.addEventListener("click", () => playRound("paper"));
-scissorsBtn.addEventListener("click", () => playRound("scissors"));
+rockBtn.addEventListener("click", () => {
+    playerChoice = "rock";
+    playRound(playerChoice);
+});
+paperBtn.addEventListener("click", () => {
+    playerChoice = "paper";
+    playRound(playerChoice);
+});
+scissorsBtn.addEventListener("click", () => {
+    playerChoice = "scissors";
+    playRound(playerChoice);
+});
 
-
+let computerChoice;
 function getComputerChoice() {
     let choice = Math.round(Math.random() * 2);
     if (choice == 0) choice = "rock";
     else if (choice == 1) choice = "paper";
     else choice = "scissors";
+    computerChoice = choice;
     return choice;
 }
 
@@ -43,5 +55,26 @@ function playRound(player) {
     let computerChoice = getComputerChoice();
     let playerChoice = player;
     let winStatus = checkWinRound(playerChoice, computerChoice);
+    updateGame(winStatus);
+    rounds_played++;
 }
 
+function updateGame(status) {
+    let lastPlayerChoice;
+    let lastComputerChoice;
+    if (status === true) {
+        lastPlayerChoice = document.querySelector(`#${playerChoice}`).style.cssText = "background-color: green;";
+        lastComputerChoice = document.querySelector(`#${computerChoice}-computer`).style.cssText = "background-color: red;";
+    } else if (status === false) {
+        lastPlayerChoice = document.querySelector(`#${playerChoice}`).style.cssText = "background-color: red;";
+        lastComputerChoice = document.querySelector(`#${computerChoice}-computer`).style.cssText = "background-color: green;";
+    } else if (status === "tie") {
+        lastPlayerChoice = document.querySelector(`#${playerChoice}`).style.cssText = "background-color: yellow;";
+        lastComputerChoice = document.querySelector(`#${computerChoice}-computer`).style.cssText = "background-color: yellow;";
+    }
+    if (rounds_played > 0) {
+        lastComputerChoice.style.cssText = "";
+        lastPlayerChoice.style.cssText = "";
+    }
+
+}

@@ -4,6 +4,16 @@ let computerScore = 0;
 const rockBtn = document.querySelector("#rock");
 const paperBtn = document.querySelector("#paper");
 const scissorsBtn = document.querySelector("#scissors");
+const playerScoreDiv = document.querySelector(".player-score");
+const computerScoreDiv = document.querySelector(".computerDiv");
+const playerScoreId = document.querySelector("#player-score-id");
+const computerScoreId = document.querySelector("#computer-score-id");
+playerScoreId.textContent = playerScore;
+computerScoreId.textContent = computerScore;
+
+rockBtn.addEventListener("click", () => playRound("rock"));
+paperBtn.addEventListener("click", () => playRound("paper"));
+scissorsBtn.addEventListener("click", () => playRound("scissors"));
 
 
 function getComputerChoice() {
@@ -15,18 +25,16 @@ function getComputerChoice() {
 }
 
 
-
-function checkWin(playerChoice, computerChoice) {
+function checkWinRound(playerChoice, computerChoice) {
     if (playerChoice == computerChoice) {
-        console.log("tie")
         return "tie";
     } else if ((playerChoice == "rock" && computerChoice == "scissors") || (playerChoice == "paper" && computerChoice == "rock") || (playerChoice == "scissors" && computerChoice == "paper")) {
-        console.log("Player choice: " + playerChoice + "\nComputer choice: " + computerChoice);
         playerScore++;
+        playerScoreId.textContent = playerScore;
         return true;
     } else if ((computerChoice == "rock" && playerChoice == "scissors") || (computerChoice == "paper" && playerChoice == "rock") || (computerChoice == "scissors" && playerChoice == "paper")) {
         computerScore++;
-        console.log("Player choice: " + playerChoice + "\nComputer choice: " + computerChoice);
+        computerScoreId.textContent = computerScore;
         return false;
     }
 }
@@ -34,26 +42,6 @@ function checkWin(playerChoice, computerChoice) {
 function playRound(player) {
     let computerChoice = getComputerChoice();
     let playerChoice = player;
-    let winStatus = checkWin(playerChoice, computerChoice);
-    if (winStatus == true);
-    else if (winStatus == "tie");
-    else;
+    let winStatus = checkWinRound(playerChoice, computerChoice);
 }
 
-function game() {
-    // for (let i = 0; i < 5; i++)
-    // {
-    //     playRound();
-    // }
-    // if (playerScore > computerScore) {
-    //     alert("You Won!");
-    // } else if (playerScore < computerScore) {
-    //     alert("Computer won!");
-    // } else {
-    //     alert("It's a tie!");
-    // }
-}
-
-rockBtn.addEventListener("click", () => playRound("rock"));
-paperBtn.addEventListener("click", () => playRound("paper"));
-scissorsBtn.addEventListener("click", () => playRound("scissors"));

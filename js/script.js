@@ -9,6 +9,7 @@ const playerScoreDiv = document.querySelector(".player-score");
 const computerScoreDiv = document.querySelector(".computerDiv");
 const playerScoreId = document.querySelector("#player-score-id");
 const computerScoreId = document.querySelector("#computer-score-id");
+const title = document.querySelector("#title");
 let playerChoice;
 playerScoreId.textContent = playerScore;
 computerScoreId.textContent = computerScore;
@@ -55,29 +56,51 @@ function playRound(player) {
     let computerChoice = getComputerChoice();
     let playerChoice = player;
     let winStatus = checkWinRound(playerChoice, computerChoice);
-    //updateGame(winStatus);
-    if (playerScore >= 5 || computerScore >= 5) {
-        alert("End Game!");
+    updateGame(winStatus);
+    if (playerScore >= 5) {
+        title.textContent = "You Won! Next game in 3 seconds";
+        setTimeout(endGame, 3000);
+    }
+    else if (computerScore >= 5) {
+        title.textContent = "You Lost! Next game in 3 seconds";
+        setTimeout(endGame, 3000);
     }
     rounds_played++;
 }
 
+function endGame() {
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreId.textContent = playerScore;
+    computerScoreId.textContent = computerScore;
+    lastComputerChoice.style.cssText = "background-color: white;";
+    lastPlayerChoice.style.cssText = "background-color: white;";
+    title.textContent = "Rock Paper Scissors";
+}
+
+let lastPlayerChoice;
+let lastComputerChoice;
 function updateGame(status) {
-    let lastPlayerChoice;
-    let lastComputerChoice;
-    if (status === true) {
-        lastPlayerChoice = document.querySelector(`#${playerChoice}`).style.cssText = "background-color: green;";
-        lastComputerChoice = document.querySelector(`#${computerChoice}-computer`).style.cssText = "background-color: red;";
-    } else if (status === false) {
-        lastPlayerChoice = document.querySelector(`#${playerChoice}`).style.cssText = "background-color: red;";
-        lastComputerChoice = document.querySelector(`#${computerChoice}-computer`).style.cssText = "background-color: green;";
-    } else if (status === "tie") {
-        lastPlayerChoice = document.querySelector(`#${playerChoice}`).style.cssText = "background-color: yellow;";
-        lastComputerChoice = document.querySelector(`#${computerChoice}-computer`).style.cssText = "background-color: yellow;";
-    }
     if (rounds_played > 0) {
-        lastComputerChoice.style.cssText = "";
-        lastPlayerChoice.style.cssText = "";
+        lastComputerChoice.style.cssText = "background-color: white;";
+        lastPlayerChoice.style.cssText = "background-color: white;";
     }
+    if (status === true) {
+        lastPlayerChoice = document.querySelector(`#${playerChoice}`);
+        lastPlayerChoice.style.cssText = "background-color: green;";
+        lastComputerChoice = document.querySelector(`#${computerChoice}-computer`);
+        lastComputerChoice.style.cssText = "background-color: red;";
+    } else if (status === false) {
+        lastPlayerChoice = document.querySelector(`#${playerChoice}`);
+        lastPlayerChoice.style.cssText = "background-color: red;";
+        lastComputerChoice = document.querySelector(`#${computerChoice}-computer`);
+        lastComputerChoice.style.cssText = "background-color: green;";
+    } else if (status === "tie") {
+        lastPlayerChoice = document.querySelector(`#${playerChoice}`);
+        lastPlayerChoice.style.cssText = "background-color: yellow;";
+        lastComputerChoice = document.querySelector(`#${computerChoice}-computer`);
+        lastComputerChoice.style.cssText = "background-color: yellow;";
+    }
+
 
 }

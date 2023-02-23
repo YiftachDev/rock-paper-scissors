@@ -55,7 +55,10 @@ function playRound(player) {
     let computerChoice = getComputerChoice();
     let playerChoice = player;
     let winStatus = checkWinRound(playerChoice, computerChoice);
-    updateGame(winStatus);
+    //updateGame(winStatus);
+    if (playerScore >= 5 || computerScore >= 5) {
+        alert("End Game!");
+    }
     rounds_played++;
 }
 
